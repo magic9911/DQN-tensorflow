@@ -1,5 +1,6 @@
 import time
-import cPickle
+#import cPickle
+import _pickle as cPickle
 import numpy as np
 import tensorflow as tf
 
