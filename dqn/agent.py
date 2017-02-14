@@ -11,9 +11,12 @@ from .replay_memory import ReplayMemory
 from .ops import linear, conv2d, clipped_error
 from dqn.utils import get_time, save_pkl, load_pkl
 
+from functools import reduce
+
 class Agent(BaseModel):
   def __init__(self, config, environment, sess):
     super(Agent, self).__init__(config)
+    self.apppath = os.path.dirname(os.path.realpath(__file__))
     self.sess = sess
     self.weight_dir = 'weights'
 
@@ -223,7 +226,7 @@ class Agent(BaseModel):
 
       q_summary = []
       avg_q = tf.reduce_mean(self.q, 0)
-      for idx in xrange(self.env.action_size):
+      for idx in range(self.env.action_size):
         q_summary.append(tf.summary.histogram('q/%s' % idx, avg_q[idx]))
       self.q_summary = tf.summary.merge(q_summary, 'q_summary')
 
@@ -319,12 +322,13 @@ class Agent(BaseModel):
       for tag in histogram_summary_tags:
         self.summary_placeholders[tag] = tf.placeholder('float32', None, name=tag.replace(' ', '_'))
         self.summary_ops[tag]  = tf.summary.histogram(tag, self.summary_placeholders[tag])
-
-      self.writer = tf.summary.FileWriter('./logs/%s' % self.model_dir, self.sess.graph)
+      
+      self.writer = tf.summary.FileWriter(self.model_dir_log, self.sess.graph)
 
     tf.initialize_all_variables().run()
 
-    self._saver = tf.train.Saver(self.w.values() + [self.step_op], max_to_keep=30)
+    #self._saver = tf.train.Saver(self.w.values() + [self.step_op], max_to_keep=30)
+    self._saver = tf.train.Saver(max_to_keep=30)
 
     self.load_model()
     self.update_target_q_network()

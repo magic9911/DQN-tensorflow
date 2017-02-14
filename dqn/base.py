@@ -54,14 +54,39 @@ class BaseModel(object):
   def checkpoint_dir(self):
     return os.path.join('checkpoints', self.model_dir)
 
+  # @property
+  # def model_dir(self):
+  #   model_dir = self.config.env_name
+  #   for k, v in self._attrs.items():
+  #     if not k.startswith('_') and k not in ['display']:
+  #       model_dir += "/%s-%s" % (k, ",".join([str(i) for i in v])
+  #           if type(v) == list else v)
+  #   return model_dir + '/'
+
   @property
   def model_dir(self):
-    model_dir = self.config.env_name
-    for k, v in self._attrs.items():
-      if not k.startswith('_') and k not in ['display']:
-        model_dir += "/%s-%s" % (k, ",".join([str(i) for i in v])
-            if type(v) == list else v)
-    return model_dir + '/'
+    #model_dir = self.config.env_name
+    model_dir = os.path.join(self.apppath, self.config.env_name)
+    # for k, v in self._attrs.items():
+    #   if not k.startswith('_') and k not in ['display']:
+    #     _dir = "%s-%s" % (k, ",".join([str(i) for i in v])
+    #         if type(v) == list else v)
+    #     if (_dir):
+    #         model_dir = os.path.join(model_dir, _dir)
+    return model_dir
+
+  @property
+  def model_dir_log(self):
+    #model_dir = self.config.env_name
+    model_dir = os.path.join(self.apppath, "logs") 
+    model_dir = os.path.join(model_dir, self.config.env_name)
+    # for k, v in self._attrs.items():
+    #   if not k.startswith('_') and k not in ['display']:
+    #     _dir = "%s-%s" % (k, ",".join([str(i) for i in v])
+    #         if type(v) == list else v)
+    #     if (_dir):
+    #         model_dir = os.path.join(model_dir, _dir)
+    return model_dir
 
   @property
   def saver(self):
