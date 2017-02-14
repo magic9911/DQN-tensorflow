@@ -133,6 +133,11 @@ class Agent(BaseModel):
     self.history.add(screen)
     self.memory.add(screen, reward, action, terminal)
 
+    # #test get sample() *********************************************************************
+    # if self.memory.count > self.history_length:
+    #   self.q_learning_mini_batch()
+    # #test get sample() *********************************************************************
+
     if self.step > self.learn_start:
       if self.step % self.train_frequency == 0:
         self.q_learning_mini_batch()
@@ -221,7 +226,7 @@ class Agent(BaseModel):
       else:
         self.l4, self.w['l4_w'], self.w['l4_b'] = linear(self.l3_flat, 512, activation_fn=activation_fn, name='l4')
         self.q, self.w['q_w'], self.w['q_b'] = linear(self.l4, self.env.action_size, name='q')
-
+        
       self.q_action = tf.argmax(self.q, dimension=1)
 
       q_summary = []

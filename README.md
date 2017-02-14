@@ -1,5 +1,6 @@
-# Human-Level Control through Deep Reinforcement Learning
+# Human-Level Control through Deep Reinforcement Learning Win10
 
+Edit Run On Windows10 BY ProjectX
 Tensorflow implementation of [Human-Level Control through Deep Reinforcement Learning](http://home.uchicago.edu/~arij/journalclub/papers/2015_Mnih_et_al.pdf).
 
 ![model](assets/model.png)
@@ -15,11 +16,14 @@ This implementation contains:
 
 ## Requirements
 
-- Python 2.7 or Python 3.3+
+- [Python 3.5 from Anaconda] (https://www.continuum.io/downloads#windows)
+- [TensorFlow 0.12.1]
+-   CPU Only (C:\> pip install --upgrade https://storage.googleapis.com/tensorflow/windows/cpu/tensorflow-0.12.1-cp35-cp35m-win_amd64.whl)
+-   GPU (C:\> pip install --upgrade https://storage.googleapis.com/tensorflow/windows/gpu/tensorflow_gpu-0.12.1-cp35-cp35m-win_amd64.whl)
 - [gym](https://github.com/openai/gym)
 - [tqdm](https://github.com/tqdm/tqdm)
 - [SciPy](http://www.scipy.org/install.html) or [OpenCV2](http://opencv.org/)
-- [TensorFlow 0.12.0](https://github.com/tensorflow/tensorflow/tree/r0.12)
+
 
 
 ## Usage
@@ -47,6 +51,7 @@ Result of training for 24 hours using GTX 980 ti.
 
 
 ## Simple Results
+List game https://gym.openai.com/envs#atari
 
 Details of `Breakout` with model `m2`(red) for 30 hours using GTX 980 Ti.
 
